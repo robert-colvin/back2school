@@ -1,0 +1,11 @@
+LinkedLists are collections of elements or "nodes" such that each node contains a pointer or reference to the next node
+in the list (singly linked list), and sometimes to the previous node too (doubly linked list). Similar to an array, but
+with only sequential access instead of random access like an array - in order to reach the 4th element, you have to
+iterate over the first 3. Since you have to go thru sequentially, LinkedLists are defined by their "head" aka the first
+element in the list
+
+Sometimes a linked list is "circular" meaning the "last" element in the list points to the "first" element in the list
+as its next element. Of course, the words first and last mean nothing in the context of a circle but whatever - one of
+the elements is always the head so...yeah.
+
+Pretty simple as far data structures go
