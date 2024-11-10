@@ -1,0 +1,24 @@
+Binary trees are the most common k-ary trees (k = 2). Represented as a root node with references to their left and right
+child nodes, where each node contains a value. Parent nodes know their children but child nodes don't usually know their parent.
+A binary tree where the nodes are sorted if you were to flatten the tree
+is called a binary search tree (because it's a pretty good representation of binary search algo). A binary tree where
+the heights of the left and right subtrees are the same or off by 1 is called a balanced binary tree, which is when tree
+traversal algorithms are most efficient. Height of a tree is defined as the number of layers of "edges", of
+the tree; This tree has a height of 2:
+    N
+   / \     <--- 1 edge layer
+  D   R
+ /   / \   <--- 2 edge layers
+A   Q   Y
+(6 nodes, 5 edges total)
+
+Trees are traversed breadth-first or depth-first (tree search algorithms follow this same rule). BFS says to traverse
+every node on a level before moving to the next one (left to right first, then top to bottom). DFS says to traverse every
+node of a subtree before moving to the next one (top to bottom, then left to right). Basically exactly what they sound
+like. They have the same time complexity of O(V + E) where V = number of vertices (nodes) and E = number of edges. That
+scales linearly with number of nodes in the trees, so it's another form of linear time (O(n)). Exception for a binary
+search tree: they can be traversed in O(log(n)) time
+
+BFS uses a queue to traverse a tree. DFS uses a stack or recursion (since recursion uses a CALL stack, har har har)
+
+Also remember trees are just a type of graphs, but graphs in general are usually more painful

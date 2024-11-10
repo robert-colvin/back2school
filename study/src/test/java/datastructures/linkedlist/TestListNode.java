@@ -6,7 +6,7 @@ public class TestListNode {
 //    ------------------------------------------
 //    21. Merge Two Sorted Lists
 
-    public ListNode mergeTwoLists(ListNode list1, ListNode list2) {
+    public static ListNode mergeTwoLists(ListNode list1, ListNode list2) {
         if (list1 == null) return list2;
         if (list2 == null) return list1;
 
@@ -32,11 +32,20 @@ public class TestListNode {
             }
             curr = curr.next;
         }
+        while(list1 != null) {
+            curr.next = new ListNode(list1.val);
+            list1 = list1.next;
+        }
+        while(list2 != null) {
+            curr.next = new ListNode(list2.val);
+            list2 = list2.next;
+        }
+
 
         return newList;
     }
 
-    public void testMergeTwoLists() {
+    public static void testMergeTwoLists() {
         // uhhhh i dunno how to setup junit here. thats'a TODO
         ListNode list1 = new ListNode(1, new ListNode(2, new ListNode(4)));
         ListNode list2 = new ListNode(1, new ListNode(3, new ListNode(4)));
@@ -46,8 +55,16 @@ public class TestListNode {
 
         ListNode actual = mergeTwoLists(list1, list2);
         for (Integer num : expected) {
-            assert actual.val == num;
+//            assert actual.val == num;
+            if (actual.val != num) {
+                throw new RuntimeException("actual: " + actual.val + " != expected: " + num + "!!!");
+            }
+            System.out.println("Good on actual: " + actual.val + " and expected: " + num);
+            actual = actual.next;
         }
+    }
+    public static void main(String[] args) {
+        testMergeTwoLists();
     }
 //    --------------------------------------
 }
