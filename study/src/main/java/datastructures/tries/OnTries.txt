@@ -1,0 +1,40 @@
+Tries are a type of k-ary search tree. Unlike trees, they represent sequences of values rather than just a single value.
+They are typically used with string operations, like building a string starting from a certain state (think autocomplete).
+
+Wait, I'm basically certain that tries and decision trees are the same thing and I know how decision trees work: So each
+node in the trie represent a state and each edge represents a choice, and the node at the end of that edge represents
+the state after making that choice from the previous state. The root node is the start state; for a string, it would
+typically be empty string, but for a game like chess or something, the root node would be the base state of the board.
+Only nodes that contain a value are valid terminal states; "unvalued" nodes are unfinished/invalid ("word" or "work"
+would be leaves, but "wor" one level above would be invalid). Also important to note that, since nodes represent "paths
+taken" in a trie, all nodes will share the same path until a different branch is taken that makes the states different;
+so "work" and "word" have the exact same path from the root node, until they get to the "wor" node. Then they split such
+that one takes the "k" path and one takes the "d" path
+
+Implementation wise, each node contains a value (can be null) NOT an actual state (they're representations), and an array
+of references to child states, where the index of the reference represents the path taken to the child state (think nodes
+as strings, and the index represents what char to append to the current string). Nodes with nonnull values represent
+terminal states.
+
+Adding a word/state to a trie means 1) starting at the root; 2) finding the index that represents the
+first choice of the state to be added; 3) if the index contains null, create a new state (node) that represents it and
+add a pointer/reference to the new state at that index. if the index is not null, traverse to the state at that index;
+4) repeat step 3 with the subsequent choices that build up the complete target state until you have built it and added
+it to the trie; 5) set the target state's node's value to signify it is a terminal state
+
+Searching for a word/state means 1) starting at the root (duh); 2) finding the index that represents the first choice of
+the state to be added; 3) if the index contains null, search miss. oh well. if the index doesn't contain null, traverse
+to the state at that index; 4) repeat step 3 with subsequent choices that build up the complete search state until you
+have hit null (failed) or gone down the full branch of choices for the search state; 5) if/when you find the search
+state in the trie, check for the value of that node - if null, search miss. if not null (terminal state), you found it!
+
+Deleting a word/state from a tries means <same steps 1-4 of search algorithm above>; 5) if/when you find the target
+state in the trie, set the value of that node to null, and check its array of child references - if all children are
+null, the parent node's reference to this node can be set to null as well (hmmmm, is this really needed? frees up memory
+I guess). if any children are nonnull, you're done
+
+Time complexities, where m = depth of "deepest" state, n = total number of states, and a = depth of single given state:
+Initially building the trie: O(mn)
+Adding, deleting, searching: O(an)
+
+Good reference article: https://medium.com/basecs/trying-to-understand-tries-3ec6bede0014
